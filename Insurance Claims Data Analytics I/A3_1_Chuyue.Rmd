@@ -1,0 +1,76 @@
+---
+title: "A3_1_Chuyue"
+author: "Chuyue"
+date: "11/17/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(sandwich)
+library(plm)
+library(lmtest)
+library(stargazer)
+library(tidyverse)
+library(knitr)
+library(car)
+library(readr)
+library(dplyr)
+```
+
+Import Data
+```{r}
+VTINP16_upd <- read.csv("~/Documents/Brandeis/Healthcare Data Analytics/Assignment3/VTINP16_upd.TXT")
+View(VTINP16_upd)
+VTOUTP16 <- read.csv("~/Documents/Brandeis/Healthcare Data Analytics/Assignment3/VTOUTP16.TXT")
+View(VTOUTP16)
+VTED16 <- read.csv("~/Documents/Brandeis/Healthcare Data Analytics/Assignment3/VTED16.TXT")
+View(VTED16)
+REVCODE <- read.csv("~/Documents/Brandeis/Healthcare Data Analytics/Assignment3/REVCODE.csv")
+View(REVCODE)
+VTREVCODE16 <- read.csv("~/Documents/Brandeis/Healthcare Data Analytics/Assignment3/VTREVCODE16.TXT")
+View(VTREVCODE16)
+```
+
+Select Uniq 3692
+```{r}
+VTREVCODE16_3692 <- VTREVCODE16[VTREVCODE16$Uniq == 3692,]
+View(VTREVCODE16_3692) #6 result
+merge_VTREVCODE16_3692_REVCODE <- merge(VTREVCODE16_3692, REVCODE, by = "REVCODE")
+View(merge_VTREVCODE16_3692_REVCODE)
+```
+
+```{r}
+VTINP16_upd_3692 <- VTINP16_upd[VTINP16_upd$UNIQ == 3692,]
+View(VTINP16_upd_3692) #1 result
+VTOUTP16_3692 <- VTOUTP16[VTOUTP16$Uniq == 3692,]
+View(VTOUTP16_3692) #0 result
+VTED16_3692 <- VTED16[VTED16$UNIQ == 3692,]
+View(VTED16_3692) #1 result
+```
+
+
+Select Uniq 40436
+```{r}
+VTREVCODE16_40436 <- VTREVCODE16[VTREVCODE16$Uniq == 40436,]
+View(VTREVCODE16_40436) #18 result
+merge_VTREVCODE16_40436_REVCODE <- merge(VTREVCODE16_40436, REVCODE, by = "REVCODE")
+View(merge_VTREVCODE16_40436_REVCODE)
+```
+
+```{r}
+VTINP16_upd_40436 <- VTINP16_upd[VTINP16_upd$UNIQ == 40436,]
+View(VTINP16_upd_40436) #1 result
+VTOUTP16_40436 <- VTOUTP16[VTOUTP16$Uniq == 40436,]
+View(VTOUTP16_40436) #0 result
+VTED16_40436 <- VTED16[VTED16$UNIQ == 40436,]
+View(VTED16_40436) #0 result
+```
+
+```{r}
+sum(merge_VTREVCODE16_40436_REVCODE$REVCHRGS) #pay all cost
+merge_VTREVCODE16_40436_REVCODE[,15:15]
+```
+
+
+
